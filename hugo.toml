@@ -1,0 +1,52 @@
+# ===== nw-village.com 站点配置（Hugo）=====
+baseURL = "https://nw-village.com/"
+title = "西北小村 · NW Village"
+
+defaultContentLanguage = "zh"
+defaultContentLanguageInSubdir = false   # 中文在根路径，英文在 /en/
+
+[pagination]
+  pagerSize = 10
+
+[params]
+  author = "NW Village"
+
+# ---------- 中文（默认语言）----------
+[languages]
+  [languages.zh]
+    label = "中文"
+    weight = 1
+    title = "西北小村的故事"
+    [languages.zh.params]
+      description = "一个西北农村的真实故事：小时候的村庄、现在的村庄，以及一个从这里走出去的人。"
+      footer = "© 2026 nw-village.com · 真实的人，真实的村庄"
+    [[languages.zh.menus.main]]
+      name = "故事"
+      pageRef = "/posts"
+      weight = 10
+    [[languages.zh.menus.main]]
+      name = "关于"
+      pageRef = "/about"
+      weight = 20
+
+  # ---------- 英文 ----------
+  [languages.en]
+    label = "English"
+    weight = 2
+    title = "Stories from a Northwest Village"
+    [languages.en.params]
+      description = "True stories from a village in northwest China: the village I grew up in, the village it has become, and the person who walked out of it."
+      footer = "© 2026 nw-village.com · Real people, real villages"
+    [[languages.en.menus.main]]
+      name = "Stories"
+      pageRef = "/posts"
+      weight = 10
+    [[languages.en.menus.main]]
+      name = "About"
+      pageRef = "/about"
+      weight = 20
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    lineNos = false

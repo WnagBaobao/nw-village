@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="{{ .Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+  {{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
+  <style>
+    :root {
+      --ink: #2b2b2b; --paper: #fdfbf7; --accent: #8a5a2b;
+      --muted: #7a7268; --line: #e6e0d6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
+      line-height: 1.8; font-size: 17px;
+    }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+    header.site {
+      border-bottom: 1px solid var(--line);
+      padding: 28px 0 18px; margin-bottom: 8px;
+    }
+    header.site a.brand {
+      font-size: 22px; font-weight: bold; color: var(--ink);
+      text-decoration: none; letter-spacing: 1px;
+    }
+    nav.main { margin-top: 10px; display: flex; gap: 18px; align-items: baseline; }
+    nav.main a { color: var(--muted); text-decoration: none; font-size: 15px; }
+    nav.main a:hover { color: var(--accent); }
+    nav.main .lang-switch { margin-left: auto; color: var(--accent); }
+    article.single { padding: 24px 0 60px; }
+    h1, h2, h3 { line-height: 1.4; }
+    h1.post-title { margin: 18px 0 4px; font-size: 26px; }
+    .meta { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+    a { color: var(--accent); }
+    .post-list { list-style: none; padding: 0; }
+    .post-list li { padding: 14px 0; border-bottom: 1px dashed var(--line); }
+    .post-list a { text-decoration: none; color: var(--ink); font-size: 18px; }
+    .post-list a:hover { color: var(--accent); }
+    .post-list time { color: var(--muted); font-size: 14px; margin-left: 12px; }
+    footer.site {
+      border-top: 1px solid var(--line);
+      color: var(--muted); font-size: 13px;
+      padding: 20px 0 40px; text-align: center;
+    }
+    img { max-width: 100%; }
+    blockquote {
+      margin: 1.5em 0; padding: 0.2em 1.2em;
+      border-left: 3px solid var(--accent); color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }}</a>
+      <nav class="main">
+        {{ range .Site.Menus.main }}
+          <a href="{{ .URL | relLangURL }}">{{ .Name }}</a>
+        {{ end }}
+        {{ if .IsTranslated }}
+          {{ range .Translations }}
+            <a class="lang-switch" href="{{ .RelPermalink }}">{{ .Language.Label }} →</a>
+          {{ end }}
+        {{ else if and .IsPage (not .IsHome) }}
+          {{ if eq .Lang "zh" }}
+            <a class="lang-switch" href="/en/">English</a>
+          {{ else }}
+            <a class="lang-switch" href="/">中文</a>
+          {{ end }}
+        {{ end }}
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="site">
+    <div class="wrap">{{ with .Site.Params.footer }}{{ . }}{{ end }}</div>
+  </footer>
+</body>
+</html>

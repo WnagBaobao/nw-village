@@ -1,0 +1,16 @@
+{{ define "main" }}
+<article class="single">
+  {{ .Content }}
+  <h2>{{ if eq .Lang "zh" }}最新故事{{ else }}Latest stories{{ end }}</h2>
+  <ul class="post-list">
+    {{ $posts := where (where .Site.RegularPages "Type" "posts") "Lang" .Lang }}
+    {{ range first 10 $posts }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ if .Date }}<time>{{ .Date.Format "2006-01-02" }}</time>{{ end }}
+        {{ if .Description }}<div class="meta" style="margin:4px 0 0">{{ .Description }}</div>{{ end }}
+      </li>
+    {{ end }}
+  </ul>
+</article>
+{{ end }}
