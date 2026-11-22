@@ -1,0 +1,7 @@
+{{ define "main" }}
+<article class="single" style="text-align:center; padding-top:60px;">
+  <h1 style="font-size:42px; margin-bottom:8px;">404</h1>
+  <p style="color:var(--muted);">{{ if eq .Lang "zh" }}这一页不在了——它可能从没存在过，像村庄里一间早已拆掉的老屋。{{ else }}This page is gone — perhaps it never existed, like an old house in the village that has long been torn down.{{ end }}</p>
+  <p style="margin-top:32px;"><a href="{{ .Site.Home.RelPermalink }}">{{ if eq .Lang "zh" }}← 回到首页{{ else }}← Back home{{ end }}</a></p>
+</article>
+{{ end }}
